@@ -17,7 +17,7 @@ module Rolify
 
     options.reverse_merge!({:role_cname => 'Role'})
     self.role_cname = options[:role_cname]
-    self.role_table_name = self.role_cname.tableize.gsub(/\//, "_")
+    self.role_table_name = options[:role_table_name] || self.role_cname.tableize.gsub(/\//, "_")
 
     default_join_table = "#{self.to_s.tableize.gsub(/\//, "_")}_#{self.role_table_name}"
     options.reverse_merge!({:role_join_table_name => default_join_table})
@@ -47,7 +47,7 @@ module Rolify
     options.reverse_merge!({ :role_cname => 'Role', :dependent => :destroy })
     resourcify_options = { :class_name => options[:role_cname].camelize, :as => :resource, :dependent => options[:dependent] }
     self.role_cname = options[:role_cname]
-    self.role_table_name = self.role_cname.tableize.gsub(/\//, "_")
+    self.role_table_name = options[:role_table_name] || self.role_cname.tableize.gsub(/\//, "_")
 
     has_many association_name, resourcify_options
 

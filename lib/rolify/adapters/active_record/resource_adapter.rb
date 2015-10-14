@@ -44,8 +44,8 @@ module Rolify
 
       private
 
-      def quote(column)
-        ActiveRecord::Base.connection.quote_column_name column
+      def quote(table)
+        ActiveRecord::Base.connection.quote_table_name table
       end
     end
   end
